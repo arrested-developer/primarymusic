@@ -26,11 +26,11 @@ describe("Test the 404 path", () => {
 });
 
 describe("Test the 500 path", () => {
-  test("It should response the GET method", done => {
+  test("It should return a 500 error on /error route", done => {
     request(router)
-      .get("/nonexistentpage")
+      .get("/error")
       .then(response => {
-        expect(response.statusCode).toBe(404);
+        expect(response.statusCode).toBe(500);
         done();
       });
   });

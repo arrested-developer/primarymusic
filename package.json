@@ -5,10 +5,17 @@
   "main": "index.js",
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/public/**",
+      "!test/**",
+      "!coverage/**",
+      "!node_modules/**"
+    ]
   },
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "start": "node index.js",
     "start:watch": "nodemon index.js",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
