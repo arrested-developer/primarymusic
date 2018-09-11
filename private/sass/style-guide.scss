@@ -1,0 +1,120 @@
+@import 'reset';
+@import 'colours';
+@import 'spacing';
+
+* {
+  box-sizing: border-box;
+}
+
+/* FONTS */
+body {
+  font-size: 1rem;
+  padding: $s;
+  font-family: 'ABeeZee', 'Arial', sans-serif;
+  color: $near-black;
+}
+
+h1,
+h2 {
+  font-family: 'Caveat Brush', cursive;
+}
+
+h1 {
+  font-size: 3.998rem;
+  margin-bottom: $m;
+}
+
+h2 {
+  font-size: 2.827rem;
+  margin-bottom: $m;
+}
+
+h3 {
+  font-size: 1.414rem;
+  margin-bottom: $m;
+  font-weight: bold;
+}
+
+p {
+  margin: $m auto $m auto;
+}
+/* COLOURS */
+.colour-palette {
+  width: 100%;
+  height: 200px;
+  margin-bottom: $l;
+}
+
+.colour-palette_labels {
+  height: $l;
+}
+.colour-palette > li {
+  width: 16%;
+  height: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.colour-palette > li:nth-child(1) {
+  background: $near-black;
+  color: $near-white;
+}
+.colour-palette > li:nth-child(2) {
+  background: $purple;
+  color: $near-white;
+}
+.colour-palette > li:nth-child(3) {
+  background: $yellow;
+}
+.colour-palette > li:nth-child(4) {
+  background: $pink;
+}
+.colour-palette > li:nth-child(5) {
+  background: $green;
+}
+.colour-palette > li:nth-child(6) {
+  background: $near-white;
+}
+/* SPACING */
+.spacing {
+  width: 100%;
+  background: $pink;
+  padding: $xs;
+  display: flex;
+  align-items: center;
+}
+
+.spacing > li {
+  background: $near-white;
+  display: inline-block;
+  margin: 0;
+}
+.spacing > li:nth-child(1) {
+  width: $xs;
+  height: $xs;
+  margin-right: $xs;
+}
+.spacing > li:nth-child(2) {
+  width: $s;
+  height: $s;
+  margin-right: $s;
+}
+.spacing > li:nth-child(3) {
+  width: $m;
+  height: $m;
+  margin-right: $m;
+}
+.spacing > li:nth-child(4) {
+  width: $l;
+  height: $l;
+  margin-right: $l;
+}
+.spacing > li:nth-child(5) {
+  width: $xl;
+  height: $xl;
+  margin-right: $xl;
+}
