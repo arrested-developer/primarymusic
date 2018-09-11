@@ -1,0 +1,15 @@
+{
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "rules": {
+        "import/no-commonjs": 0,
+        "import/no-nodejs-modules": 0,
+        "no-console": 0
+    },
+    "extends": [
+        "node",
+        "prettier"
+    ],
+}
