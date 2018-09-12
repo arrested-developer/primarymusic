@@ -8,7 +8,9 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.js",
-      "!**/public/**",
+      "**/public/**/logic.js",
+      "!**/public/scripts/dom.js",
+      "!**/public/**/score.js",
       "!test/**",
       "!coverage/**",
       "!node_modules/**",
