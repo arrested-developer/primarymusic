@@ -8,24 +8,24 @@ var drum1000 = document.getElementById("drum1000");
 
 var currentScore = score();
 
-function hitDrum(num) {
+function hitDrum(num, drum) {
   currentScore.add(num);
   scoreDisplay.textContent = currentScore.get();
-  // playsound
+  playSound(drum);
 }
 
 drum1.addEventListener("click", function() {
-  hitDrum(1);
+  hitDrum(1, "drum1");
 });
 
 drum10.addEventListener("click", function() {
-  hitDrum(10);
+  hitDrum(10, "drum10");
 });
 
 drum100.addEventListener("click", function() {
-  hitDrum(100);
+  hitDrum(100, "drum100");
 });
 
 drum1000.addEventListener("click", function() {
-  hitDrum(1000);
+  hitDrum(1000, "drum1000");
 });

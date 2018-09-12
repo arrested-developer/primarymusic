@@ -16,5 +16,3 @@ var score = function() {
     }
   };
 };
-
-module.exports = { score };

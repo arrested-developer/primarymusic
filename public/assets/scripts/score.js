@@ -2,8 +2,6 @@
 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 
-var total = 0;
-
 var drumSounds = {
   drum1: {
     url: "/assets/sounds/drums/kick-acoustic01.wav"
@@ -35,7 +33,7 @@ function loadSound(name) {
   xhr.responseType = "arraybuffer";
 
   xhr.onload = function() {
-    soundContext = decodeAudioData(xhr.response, function(newBuffer) {
+    soundContext.decodeAudioData(xhr.response, function(newBuffer) {
       sound.buffer = newBuffer;
     });
   };
@@ -68,25 +66,19 @@ function playSound(name, options) {
   }
 }
 
-function drumTapped(points) {
-  total = incrementTotal(points);
-  switch (points) {
-    case 1:
-      playSound("drum1");
-      break;
-    case 10:
-      playSound("drum10");
-      break;
-    case 100:
-      playSound("drum100");
-      break;
-    case 1000:
-      playSound("drum1000");
-  }
-}
-
-function incrementTotal(num) {
-  return (total += num);
-}
-// add to total
-// plays a noise
+// function drumTapped(points) {
+//   total = incrementTotal(points);
+//   switch (points) {
+//     case 1:
+//       playSound("drum1");
+//       break;
+//     case 10:
+//       playSound("drum10");
+//       break;
+//     case 100:
+//       playSound("drum100");
+//       break;
+//     case 1000:
+//       playSound("drum1000");
+//   }
+// }
