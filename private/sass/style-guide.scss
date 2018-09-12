@@ -1,7 +1,9 @@
-@import 'reset';
-@import 'colours';
-@import 'spacing';
+@import "reset";
+@import "colours";
+@import "spacing";
+@import "fonts";
 
+/* GENERAL */
 * {
   box-sizing: border-box;
 }
@@ -10,13 +12,13 @@
 body {
   font-size: 1rem;
   padding: $s;
-  font-family: 'ABeeZee', 'Arial', sans-serif;
+  font-family: $sans-serif;
   color: $near-black;
 }
 
 h1,
 h2 {
-  font-family: 'Caveat Brush', cursive;
+  font-family: $headings;
 }
 
 h1 {
