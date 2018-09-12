@@ -1,0 +1,43 @@
+@import "reset";
+@import "colours";
+@import "spacing";
+@import "fonts";
+
+/* GENERAL */
+* {
+  box-sizing: border-box;
+}
+
+/* FONTS */
+
+body {
+  font-size: 1rem;
+  padding: $s;
+  font-family: $sans-serif;
+  color: $near-black;
+}
+
+h1,
+h2 {
+  font-family: $headings;
+}
+
+h1 {
+  font-size: 3.998rem;
+  margin-bottom: $m;
+}
+
+h2 {
+  font-size: 2.827rem;
+  margin-bottom: $m;
+}
+
+h3 {
+  font-size: 1.414rem;
+  margin-bottom: $m;
+  font-weight: bold;
+}
+
+p {
+  margin: $m auto $m auto;
+}
