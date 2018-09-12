@@ -65,20 +65,3 @@ function playSound(name, options) {
     source.start(0);
   }
 }
-
-// function drumTapped(points) {
-//   total = incrementTotal(points);
-//   switch (points) {
-//     case 1:
-//       playSound("drum1");
-//       break;
-//     case 10:
-//       playSound("drum10");
-//       break;
-//     case 100:
-//       playSound("drum100");
-//       break;
-//     case 1000:
-//       playSound("drum1000");
-//   }
-// }

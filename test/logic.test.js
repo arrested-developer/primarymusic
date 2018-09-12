@@ -3,7 +3,7 @@
 const logic = require("../public/assets/scripts/logic");
 
 describe("Score tests", () => {
-  const score = logic.score();
+  const score = logic();
   test("Testing get method", () => {
     expect(score.add(5)).toBe(5);
     expect(score.get()).toBe(5);

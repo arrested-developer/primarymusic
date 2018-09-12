@@ -16,3 +16,7 @@ var score = function() {
     }
   };
 };
+
+if (typeof module !== "undefined") {
+  module.exports = score;
+}
