@@ -9,7 +9,7 @@
     "collectCoverageFrom": [
       "**/*.js",
       "**/public/**/logic.js",
-      "!**/public/scripts/dom.js",
+      "!**/public/**/dom.js",
       "!**/public/**/score.js",
       "!test/**",
       "!coverage/**",
