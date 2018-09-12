@@ -13,13 +13,10 @@ router.get("/", home.get);
 
 // setup error route for test environments
 if (process.env.NODE_ENV === "test") {
-  console.log("I'm testing!");
   const triggerError = () => (req, res, next) => {
-    console.log("Trigger error");
     try {
       throw new Error("this function causes an error");
     } catch (error) {
-      console.log("Caught");
       next(error);
     }
   };

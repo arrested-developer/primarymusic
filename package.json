@@ -11,11 +11,12 @@
       "!**/public/**",
       "!test/**",
       "!coverage/**",
-      "!node_modules/**"
+      "!node_modules/**",
+      "!**/index.js"
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "jest",
     "start": "node index.js",
     "start:watch": "nodemon index.js",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
