@@ -12,7 +12,6 @@
 
 body {
   font-size: 1rem;
-  padding: $s;
   font-family: $sans-serif;
   color: $black;
 }
@@ -71,10 +70,9 @@ header {
 
 main {
   position: relative;
-  padding: 0 $m $m $m;
   border: 0;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
 
 /* drum elements positioned in main which has H472px, W320px */
@@ -86,32 +84,32 @@ main {
 }
 
 #drum1 {
-  width: 61px;
-  height: 57px;
+  width: 19vmin;
+  height: 18.5vmin;
   right: 64px;
   top: 0;
   transform: rotate(10deg);
 }
 
 #drum10 {
-  width: 108px;
-  height: 127px;
-  left: 35px;
+  width: 34vmin;
+  height: 40vmin;
+  left: 11vw;
   top: 30px;
   transform: rotate(-10deg);
 }
 
 #drum100 {
-  width: 155px;
-  height: 152px;
-  top: 84px;
+  width: 48.4vmin;
+  height: 47.8vmin;
+  bottom: 42vh;
   right: 16px;
   transform: rotate(20deg);
 }
 
 #drum1000 {
-  width: 255px;
-  height: 249px;
+  width: 70vmin;
+  height: 71.6vmin;
   bottom: 16px;
   left: 0;
 }
@@ -142,6 +140,12 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.circle-button:hover,
+.circle-button:focus {
+  outline: none;
+  background: $green-2;
 }
 
 .circle-button > .arrow--back {
