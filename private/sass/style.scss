@@ -44,25 +44,19 @@ p {
 
 /* NUMDRUM */
 
-.drum {
-  border: 0;
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  transition: 0.1s;
-}
-
 h1 {
   color: $white;
 }
 
 #container {
   background-color: $purple-1;
-  height: 568px;
-  width: 320px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
 }
+
+/* pixel measurements based on screen H:568px W:320px */
 
 header {
   display: flex;
@@ -79,8 +73,16 @@ main {
   position: relative;
   padding: 0 $m $m $m;
   border: 0;
-  height: calc(568px - 96px);
+  height: 100vh;
   width: 100%;
+}
+
+/* drum elements positioned in main which has H472px, W320px */
+
+.drum {
+  border: 0;
+  position: absolute;
+  transition: 0.1s;
 }
 
 #drum1 {
