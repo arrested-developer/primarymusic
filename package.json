@@ -47,7 +47,9 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.314.0",
     "body-parser": "^1.18.3",
+    "cluster": "^0.7.7",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
     "dotenv": "^6.0.0",

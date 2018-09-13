@@ -4,16 +4,16 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var drumSounds = {
   drum1: {
-    url: "/assets/sounds/drums/kick-acoustic01.wav"
+    url: "/assets/sounds/drums/hihat.wav"
   },
   drum10: {
-    url: "/assets/sounds/drums/kick-acoustic02.wav"
+    url: "/assets/sounds/drums/bongo.wav"
   },
   drum100: {
-    url: "/assets/sounds/drums/tom-acoustic01.wav"
+    url: "/assets/sounds/drums/snare.wav"
   },
   drum1000: {
-    url: "/assets/sounds/drums/tom-acoustic02.wav"
+    url: "/assets/sounds/drums/kick.wav"
   }
 };
 
