@@ -5,9 +5,11 @@ const router = express.Router();
 // require routes
 const home = require("./home");
 const error = require("./error");
+const numdrum = require("./numdrum");
 
 // defined routes
 router.get("/", home.get);
+router.get("/numdrum", numdrum.get);
 
 // ALL DEFINED ROUTES ABOVE THIS LINE :D << NOT A JOKE
 
