@@ -42,8 +42,54 @@ p {
   margin: $m auto $m auto;
 }
 
+/* NUMDRUM */
+
 .drum {
-  border: solid;
-  width: 40px;
-  height: 40px;
+  border: 0;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+}
+
+h1 {
+  color: $white;
+}
+
+#container {
+  background-color: $purple-1;
+  height: 568px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: $m;
+  margin: 0;
+  border: 0;
+  height: 96px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+main {
+  position: relative;
+  padding: 0 $m $m $m;
+  border: 0;
+  height: calc(568px - 96px);
+  width: 100%;
+}
+
+#drum100 {
+  width: 280px;
+  height: 275px;
+}
+
+#drum1000 {
+  width: 255px;
+  height: 249px;
+  bottom: 16px;
+  left: 0;
 }

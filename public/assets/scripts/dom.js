@@ -7,7 +7,10 @@ var currentScore = score();
 
 function hitDrum(num, drum) {
   currentScore.add(num);
-  scoreDisplay.textContent = currentScore.get();
+  var s = document.createElement("h1");
+  var o = scoreDisplay.querySelector("h1");
+  s.textContent = currentScore.get();
+  scoreDisplay.replaceChild(s, o);
   playSound(drum);
 }
 
