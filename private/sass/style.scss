@@ -12,9 +12,8 @@
 
 body {
   font-size: 1rem;
-  padding: $s;
   font-family: $sans-serif;
-  color: $near-black;
+  color: $black;
 }
 
 h1,
@@ -42,8 +41,119 @@ p {
   margin: $m auto $m auto;
 }
 
+/* NUMDRUM */
+
+h1 {
+  color: $white;
+}
+
+#container {
+  background-color: $purple-1;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* pixel measurements based on screen H:568px W:320px */
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: $m;
+  margin: 0;
+  border: 0;
+  height: 96px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+main {
+  position: relative;
+  border: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* drum elements positioned in main which has H472px, W320px */
+
 .drum {
-  border: solid;
-  width: 40px;
+  border: 0;
+  position: absolute;
+  transition: 0.1s;
+}
+
+#drum1 {
+  width: 19vmin;
+  height: 18.5vmin;
+  right: 64px;
+  top: 0;
+  transform: rotate(10deg);
+}
+
+#drum10 {
+  width: 34vmin;
+  height: 40vmin;
+  left: 11vw;
+  top: 30px;
+  transform: rotate(-10deg);
+}
+
+#drum100 {
+  width: 48.4vmin;
+  height: 47.8vmin;
+  bottom: 42vh;
+  right: 16px;
+  transform: rotate(20deg);
+}
+
+#drum1000 {
+  width: 70vmin;
+  height: 71.6vmin;
+  bottom: 16px;
+  left: 0;
+}
+
+.drum1--clicked {
+  transform: rotate(15deg) !important;
+}
+
+.drum10--clicked {
+  transform: rotate(-15deg) !important;
+}
+
+.drum100--clicked {
+  transform: rotate(25deg) !important;
+}
+
+.drum1000--clicked {
+  transform: rotate(-5deg) !important;
+}
+
+.circle-button {
+  border-radius: 50%;
   height: 40px;
+  width: 40px;
+  background: $accent;
+  border: none;
+  box-shadow: 2px 2px 5px $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-button:hover,
+.circle-button:focus {
+  outline: none;
+  background: $green-2;
+}
+
+.circle-button > .arrow--back {
+  width: 20px;
+  height: 20px;
+}
+
+.circle-button > .arrow--reset {
+  width: 30px;
+  height: 34px;
 }

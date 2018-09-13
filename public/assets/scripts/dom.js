@@ -1,16 +1,25 @@
 /* eslint-disable */
 
+// declare page elements
 var scoreDisplay = document.getElementById("score");
 var drums = document.querySelectorAll(".drum");
 
+// instantiate player score
 var currentScore = score();
 
+// reset button
+document.getElementById("reset").addEventListener("click", function() {
+  document.querySelector("#score > h1").textContent = currentScore.reset();
+});
+
+// hitDrum is a wrapper function which calls individual gameplay elements as each drum is hit
 function hitDrum(num, drum) {
-  currentScore.add(num);
-  scoreDisplay.textContent = currentScore.get();
+  document.querySelector("#score > h1").textContent = currentScore.add(num);
   playSound(drum);
+  document.getElementById(drum).classList.toggle(drum + "--clicked");
 }
 
+// go through drums (has class .drum) and attach eventListeners to call hitDrum();
 drums.forEach(function(drum) {
   var drumId = drum.id;
   var drumScore = Number(drum.id.slice(4));
