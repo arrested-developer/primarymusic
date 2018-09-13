@@ -49,6 +49,7 @@ p {
   width: 80px;
   height: 80px;
   position: absolute;
+  transition: 0.1s;
 }
 
 h1 {
@@ -82,9 +83,28 @@ main {
   width: 100%;
 }
 
+#drum1 {
+  width: 61px;
+  height: 57px;
+  right: 64px;
+  top: 0;
+  transform: rotate(10deg);
+}
+
+#drum10 {
+  width: 108px;
+  height: 127px;
+  left: 35px;
+  top: 30px;
+  transform: rotate(-10deg);
+}
+
 #drum100 {
-  width: 280px;
-  height: 275px;
+  width: 155px;
+  height: 152px;
+  top: 84px;
+  right: 16px;
+  transform: rotate(20deg);
 }
 
 #drum1000 {
@@ -92,4 +112,42 @@ main {
   height: 249px;
   bottom: 16px;
   left: 0;
+}
+
+.drum1--clicked {
+  transform: rotate(15deg) !important;
+}
+
+.drum10--clicked {
+  transform: rotate(-15deg) !important;
+}
+
+.drum100--clicked {
+  transform: rotate(25deg) !important;
+}
+
+.drum1000--clicked {
+  transform: rotate(-5deg) !important;
+}
+
+.circle-button {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  background: $accent;
+  border: none;
+  box-shadow: 2px 2px 5px $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-button > .arrow--back {
+  width: 20px;
+  height: 20px;
+}
+
+.circle-button > .arrow--reset {
+  width: 30px;
+  height: 34px;
 }

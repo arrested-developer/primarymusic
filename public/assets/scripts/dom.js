@@ -12,6 +12,7 @@ function hitDrum(num, drum) {
   s.textContent = currentScore.get();
   scoreDisplay.replaceChild(s, o);
   playSound(drum);
+  document.getElementById(drum).classList.toggle(drum + "--clicked");
 }
 
 drums.forEach(function(drum) {
@@ -20,4 +21,9 @@ drums.forEach(function(drum) {
   drum.addEventListener("click", function() {
     hitDrum(drumScore, drumId);
   });
+});
+
+document.getElementById("reset").addEventListener("click", function() {
+  currentScore.reset();
+  document.querySelector("#score > h1").textContent = "0";
 });
