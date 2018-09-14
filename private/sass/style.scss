@@ -4,6 +4,12 @@
 @import "fonts";
 
 /* GENERAL */
+
+/* DISABLE TOUCH DOUBLECLICK FOR ZOOM */
+html {
+  touch-action: manipulation;
+}
+
 * {
   box-sizing: border-box;
 }
