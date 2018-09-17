@@ -33,3 +33,7 @@ drums.forEach(function(drum) {
 document.ontouchmove = function(e) {
   e.preventDefault();
 };
+
+window.addEventListener("scroll", function(e) {
+  e.preventDefault();
+});
