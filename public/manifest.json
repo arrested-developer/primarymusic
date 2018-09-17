@@ -3,7 +3,7 @@
   "lang": "en",
   "name": "MusicApp",
   "scope": "/",
-  "display": "browser",
+  "display": "fullscreen",
   "start_url": "https://numdrum.herokuapp.com/numdrum",
   "short_name": "MusicApp",
   "theme_color": "transparent",
