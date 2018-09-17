@@ -7,7 +7,7 @@
 
 /* DISABLE TOUCH DOUBLECLICK FOR ZOOM */
 html {
-  touch-action: manipulation;
+  touch-action: none;
 }
 
 * {

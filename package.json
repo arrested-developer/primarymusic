@@ -14,7 +14,9 @@
       "!test/**",
       "!coverage/**",
       "!node_modules/**",
-      "!**/index.js"
+      "!**/index.js",
+      "!**/manup.js",
+      "!**/pwabuilder-sw.js"
     ]
   },
   "scripts": {
