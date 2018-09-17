@@ -28,3 +28,8 @@ drums.forEach(function(drum) {
     hitDrum(drumScore, drumId);
   });
 });
+
+// disable scrolling on page
+document.ontouchmove = function(e) {
+  e.preventDefault();
+};
