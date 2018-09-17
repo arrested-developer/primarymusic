@@ -23,7 +23,7 @@ function hitDrum(num, drum) {
 drums.forEach(function(drum) {
   var drumId = drum.id;
   var drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("click", function() {
+  drum.addEventListener("touchend", function() {
     hitDrum(drumScore, drumId);
   });
 });
