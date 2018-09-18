@@ -23,7 +23,18 @@ function hitDrum(num, drum) {
 drums.forEach(function(drum) {
   var drumId = drum.id;
   var drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("click", function() {
+  drum.addEventListener("touchend", function(e) {
+    e.preventDefault();
     hitDrum(drumScore, drumId);
   });
 });
+
+// disable scrolling on page
+// document.ontouchmove = function(e) {
+//   e.preventDefault();
+// };
+
+// window.addEventListener("scroll", function(e) {
+//   e.preventDefault();
+// });
+bodyScrollLock.disableBodyScroll();
