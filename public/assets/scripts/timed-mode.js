@@ -1,14 +1,5 @@
 const timedMode = () => {
-  // load rules page: loadRules()
-  // load gameplay page: loadGame()
-  // start 60 sec timer
-  // set player score to 0
-  // loop until timer end:
-  // generateNumber()
-  // display number
-  // normal gameplay
-  // on 'Submit' checkNumber()
-  // if correct, add 1 to total score
+  loadRules();
 };
 
 const loadRules = () => {
@@ -29,12 +20,81 @@ const loadRules = () => {
     "Hit the drums to make as many numbers as you can in 1 minute";
   gameContainer.appendChild(rulesText);
   // display start button
-
-  // on press 'Go', return
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start!";
+  startButton.addEventListener("click", event => {
+    event.preventDefault();
+    loadGame();
+  });
+  gameContainer.appendChild(startButton);
 };
 
 const loadGame = () => {
-  // display game
+  const gameContainer = document.getElementById("game");
+  killChildren(gameContainer);
+  // bring in the drums
+  // declare page elements
+  const scoreDisplay = document.querySelector("#score > h1");
+
+  // instantiate player score
+  const currentScore = score(); //eslint-disable-line no-undef
+  const playerScore = score();
+
+  // add drums back in
+
+  let drumPicture = document.createElement("img");
+  drumPicture.src = "/assets/svg/frog.svg";
+  drumPicture.alt = "Frög, value 1000";
+  drumPicture.classList.add("drum");
+  drumPicture.id = "drum1000";
+  gameContainer.appendChild(drumPicture);
+
+  drumPicture = document.createElement("img");
+  drumPicture.src = "assets/svg/cyclopig.svg";
+  drumPicture.alt = "Cyclopig, value 100";
+  drumPicture.classList.add("drum");
+  drumPicture.id = "drum100";
+  gameContainer.appendChild(drumPicture);
+
+  drumPicture = document.createElement("img");
+  drumPicture.src = "assets/svg/burger.svg";
+  drumPicture.alt = "Burger, value 10";
+  drumPicture.classList.add("drum");
+  drumPicture.id = "drum10";
+  gameContainer.appendChild(drumPicture);
+
+  drumPicture = document.createElement("img");
+  drumPicture.src = "assets/svg/ninja.svg";
+  drumPicture.alt = "Ninja, value 1";
+  drumPicture.classList.add("drum");
+  drumPicture.id = "drum1";
+  gameContainer.appendChild(drumPicture);
+
+  // reset button
+  document.getElementById("reset").addEventListener("click", () => {
+    scoreDisplay.textContent = currentScore.reset();
+  });
+
+  // go through drums (has class .drum) and attach eventListeners to call hitDrum();
+  const drums = document.querySelectorAll(".drum");
+  drums.forEach(drum => {
+    const drumId = drum.id;
+    const drumScore = Number(drum.id.slice(4));
+    drum.addEventListener("click", e => {
+      e.preventDefault();
+      hitDrum(drumScore, drumId);
+    });
+  });
+
+  // start 60 sec timer
+  setTimeout(() => alert("Game Over!"), 60 * 1000);
+
+  // loop until timer end:
+  // generateNumber()
+  // display number
+  // normal gameplay
+  // on 'Submit' checkNumber()
+  // if correct, add 1 to total score
 };
 
 const evalScore = score => {
@@ -70,6 +130,13 @@ const killChildren = element => {
     element.removeChild(element.firstChild);
   }
 };
+
+// hitDrum is a wrapper function which calls individual gameplay elements as each drum is hit
+function hitDrum(num, drum) {
+  scoreDisplay.textContent = currentScore.add(num);
+  playSound(drum); //eslint-disable-line no-undef
+  document.getElementById(drum).classList.toggle(drum + "--clicked");
+}
 
 const checkNumber = (actual, expected) => actual === expected;
 
