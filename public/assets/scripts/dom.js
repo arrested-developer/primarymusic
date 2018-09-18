@@ -1,29 +1,27 @@
-/* eslint-disable */
-
 // declare page elements
-var scoreDisplay = document.getElementById("score");
-var drums = document.querySelectorAll(".drum");
+const scoreDisplay = document.querySelector("#score > h1");
+const drums = document.querySelectorAll(".drum");
 
 // instantiate player score
-var currentScore = score();
+const currentScore = score(); //eslint-disable-line no-undef
 
 // reset button
-document.getElementById("reset").addEventListener("click", function() {
-  document.querySelector("#score > h1").textContent = currentScore.reset();
+document.getElementById("reset").addEventListener("click", () => {
+  scoreDisplay.textContent = currentScore.reset();
 });
 
 // hitDrum is a wrapper function which calls individual gameplay elements as each drum is hit
 function hitDrum(num, drum) {
-  document.querySelector("#score > h1").textContent = currentScore.add(num);
-  playSound(drum);
+  scoreDisplay.textContent = currentScore.add(num);
+  playSound(drum); //eslint-disable-line no-undef
   document.getElementById(drum).classList.toggle(drum + "--clicked");
 }
 
 // go through drums (has class .drum) and attach eventListeners to call hitDrum();
-drums.forEach(function(drum) {
-  var drumId = drum.id;
-  var drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("click", function() {
+drums.forEach(drum => {
+  const drumId = drum.id;
+  const drumScore = Number(drum.id.slice(4));
+  drum.addEventListener("click", () => {
     hitDrum(drumScore, drumId);
   });
 });
