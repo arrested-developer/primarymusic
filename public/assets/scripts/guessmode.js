@@ -15,4 +15,6 @@ const startGuessMode = () => {
     console.log(`you have ${taps} taps`);
     currentScore.reset();
   };
+
+  playRound(scores.playerOne.get());
 };
