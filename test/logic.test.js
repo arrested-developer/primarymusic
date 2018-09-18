@@ -26,4 +26,12 @@ describe("Timed mode tests", () => {
     expect(evalScore(7)).toBe("medium");
     expect(evalScore(25)).toBe("hard");
   });
+  test("Test generateNumber", () => {
+    expect(generateNumber(0)).toBeLessThan(100);
+    expect(generateNumber(0)).toBeGreaterThan(0);
+    expect(generateNumber(7)).toBeLessThan(10000);
+    expect(generateNumber(7)).toBeGreaterThan(0);
+    expect(generateNumber(25)).toBeLessThan(10000);
+    expect(generateNumber(25)).toBeGreaterThan(0);
+  });
 });

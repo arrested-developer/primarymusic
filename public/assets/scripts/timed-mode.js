@@ -20,12 +20,6 @@ const loadGame = () => {
   // display game
 };
 
-const generateNumber = () => {
-  // diffculty = evalScore()
-  // switch difficulty:
-  // generates appropriate random number
-};
-
 const evalScore = score => {
   switch (true) {
     case score <= 5:
@@ -34,6 +28,22 @@ const evalScore = score => {
       return "medium";
     case score > 10:
       return "hard";
+  }
+};
+
+const generateNumber = score => {
+  const difficulty = evalScore(score);
+  switch (difficulty) {
+    case "easy":
+      return Math.ceil(Math.random() * Math.ceil(99));
+    case "medium":
+      return Math.ceil(Math.random() * Math.ceil(9999));
+    case "hard":
+      return (
+        Math.ceil(Math.random() * Math.ceil(9)) * 1000 +
+        Math.ceil(Math.random() * Math.ceil(99)) +
+        Math.ceil(Math.random() * Math.ceil(9))
+      );
   }
 };
 
