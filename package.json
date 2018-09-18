@@ -16,7 +16,8 @@
       "!node_modules/**",
       "!**/index.js",
       "!**/manup.js",
-      "!**/pwabuilder-sw.js"
+      "!**/pwabuilder-sw.js",
+      "!**/bodyScrollLock.js"
     ]
   },
   "scripts": {
