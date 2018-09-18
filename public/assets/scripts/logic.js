@@ -11,6 +11,9 @@ const score = () => {
     reset() {
       score = 0;
       return score;
+    },
+    check(n) {
+      return n == score;
     }
   };
 };
