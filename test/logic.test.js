@@ -21,4 +21,9 @@ describe("Timed mode tests", () => {
     expect(checkNumber(6, 6)).toBeTruthy();
     expect(checkNumber(6, 5)).toBeFalsy();
   });
+  test("Test evalScore - easy, medium & hard", () => {
+    expect(evalScore(0)).toBe("easy");
+    expect(evalScore(7)).toBe("medium");
+    expect(evalScore(25)).toBe("hard");
+  });
 });

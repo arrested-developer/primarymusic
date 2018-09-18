@@ -26,8 +26,15 @@ const generateNumber = () => {
   // generates appropriate random number
 };
 
-const evalScore = () => {
-  // evaluates how hard the number should be
+const evalScore = score => {
+  switch (true) {
+    case score <= 5:
+      return "easy";
+    case score <= 10:
+      return "medium";
+    case score > 10:
+      return "hard";
+  }
 };
 
 const checkNumber = (actual, expected) => actual === expected;
