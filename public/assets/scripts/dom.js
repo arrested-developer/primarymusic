@@ -27,12 +27,5 @@ drums.forEach(function(drum) {
   });
 });
 
-// disable scrolling on page
-// document.ontouchmove = function(e) {
-//   e.preventDefault();
-// };
-
-// window.addEventListener("scroll", function(e) {
-//   e.preventDefault();
-// });
+// disable scrolling
 bodyScrollLock.disableBodyScroll();
