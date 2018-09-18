@@ -18,10 +18,14 @@ function hitDrum(num, drum) {
 }
 
 // go through drums (has class .drum) and attach eventListeners to call hitDrum();
-drums.forEach(drum => {
-  const drumId = drum.id;
-  const drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("click", () => {
+drums.forEach(function(drum) {
+  var drumId = drum.id;
+  var drumScore = Number(drum.id.slice(4));
+  drum.addEventListener("touchend", function(e) {
+    e.preventDefault();
     hitDrum(drumScore, drumId);
   });
 });
+
+// disable scrolling
+bodyScrollLock.disableBodyScroll();

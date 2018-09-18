@@ -1,0 +1,112 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "MusicApp",
+  "scope": "/",
+  "display": "fullscreen",
+  "start_url": "https://numdrum.herokuapp.com/numdrum",
+  "short_name": "MusicApp",
+  "theme_color": "transparent",
+  "description": "musical game",
+  "orientation": "any",
+  "background_color": "transparent",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/images/a9c67ead-c998-ec7f-7473-66d3aabe7a83.webPlatform.png",
+      "sizes": "44x44",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/d38d13b0-1870-d256-5191-55b9f14373ad.webPlatform.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/windows10/SplashScreen.scale-200.png.png",
+      "sizes": "1240x600",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/e1317c3a-293f-70aa-c9ac-57fea9d99793.webPlatform.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/3e5b9d07-fb99-c15e-a247-f3a34c199981.webPlatform.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/e55f2f6d-c864-3570-274d-8f00695a145b.webPlatform.png",
+      "sizes": "88x88",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/e4b1e4b0-4657-0bf9-e695-70ad871c4905.webPlatform.png",
+      "sizes": "24x24",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/f9b14ca9-32cc-12a7-48d3-f83b9da54fe5.webPlatform.png",
+      "sizes": "50x50",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/9d945ac4-1875-e5ec-7721-8e9306647692.webPlatform.png",
+      "sizes": "620x300",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/4009acd7-c57b-4f24-a0d9-89720f876eff.webPlatform.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/50ed8c87-2f6b-0331-538c-f060c21094d4.webPlatform.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/cda5ab43-7418-5660-4385-e583ae4be722.webPlatform.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/8ae63ade-e45f-9dc3-dcf2-a3b84f1979bf.webPlatform.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/a4986287-1b99-a3fc-ecab-4b7b70ba2672.webPlatform.png",
+      "sizes": "36x36",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/ios/ios-appicon-1024-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/ba2aad01-e292-df7f-4c83-a7c9ded7a6f9.webPlatform.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/e32618aa-3e9f-2ff1-d888-51e0f4ea3d06.webPlatform.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/bc3b5be3-b0ab-e3a7-f0fb-c82f8aff5c2e.webPlatform.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/d93edb3d-6636-98cc-3a3a-112f65327802.webPlatform.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    }
+  ]
+}
