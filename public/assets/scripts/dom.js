@@ -11,17 +11,17 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 // hitDrum is a wrapper function which calls individual gameplay elements as each drum is hit
-function hitDrum(num, drum) {
+const hitDrum = (num, drum) => {
   scoreDisplay.textContent = currentScore.add(num);
   playSound(drum); //eslint-disable-line no-undef
   document.getElementById(drum).classList.toggle(drum + "--clicked");
-}
+};
 
 // go through drums (has class .drum) and attach eventListeners to call hitDrum();
-drums.forEach(function(drum) {
-  var drumId = drum.id;
-  var drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("touchend", function(e) {
+drums.forEach(drum => {
+  const drumId = drum.id;
+  const drumScore = Number(drum.id.slice(4));
+  drum.addEventListener("touchend", e => {
     e.preventDefault();
     hitDrum(drumScore, drumId);
   });
