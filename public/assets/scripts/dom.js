@@ -17,11 +17,15 @@ const hitDrum = (num, drum) => {
   document.getElementById(drum).classList.toggle(drum + "--clicked");
 };
 
+// check for touch events, decide whether to trigger drums on click or tap
+const isTouchDevice = () => "ontouchstart" in document.documentElement;
+const triggerEvent = isTouchDevice() ? "touchend" : "click";
+
 // go through drums (has class .drum) and attach eventListeners to call hitDrum();
 drums.forEach(drum => {
   const drumId = drum.id;
   const drumScore = Number(drum.id.slice(4));
-  drum.addEventListener("touchend", e => {
+  drum.addEventListener(triggerEvent, e => {
     e.preventDefault();
     hitDrum(drumScore, drumId);
   });
