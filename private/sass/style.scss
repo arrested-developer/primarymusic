@@ -90,34 +90,47 @@ main {
 }
 
 #drum1 {
-  width: 19vmin;
-  height: 18.5vmin;
-  right: 64px;
+  width: 12.5vmax;
+  max-width: 25vmin;
+  height: auto;
+  right: 10vw;
   top: 0;
   transform: rotate(10deg);
 }
 
 #drum10 {
-  width: 34vmin;
-  height: 40vmin;
-  left: 11vw;
-  top: 30px;
+  width: 22.5vmax;
+  max-width: 45vmin;
+  height: auto;
+  left: 10vw;
+  top: 4vh;
   transform: rotate(-10deg);
 }
 
 #drum100 {
-  width: 48.4vmin;
-  height: 47.8vmin;
-  bottom: 42vh;
+  width: 31.8vmax;
+  max-width: 50vmin;
+  height: auto;
+  bottom: 45vh;
   right: 16px;
   transform: rotate(20deg);
 }
 
 #drum1000 {
-  width: 70vmin;
-  height: 71.6vmin;
+  width: 50vmax;
+  max-width: 90vmin;
+  height: auto;
   bottom: 16px;
   left: 0;
+}
+
+@media all and (orientation: landscape) {
+  #drum10 {
+    left: calc(100vw - 80vh);
+  }
+  #drum100 {
+    bottom: 15vh;
+  }
 }
 
 .drum1--clicked {
