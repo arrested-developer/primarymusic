@@ -1,16 +1,14 @@
-/* eslint-disable */
-
-var score = function() {
-  var score = 0;
+const score = () => {
+  let score = 0;
   return {
-    get: function() {
+    get() {
       return score;
     },
-    add: function(num) {
+    add(num) {
       score += num;
       return score;
     },
-    reset: function() {
+    reset() {
       score = 0;
       return score;
     }

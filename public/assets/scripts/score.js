@@ -1,8 +1,7 @@
-/* eslint-disable */
+// assign webkitAudioContext to AudoContext if browser is Safari :)
+const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-
-var drumSounds = {
+const drumSounds = {
   drum1: {
     url: "/assets/sounds/drums/hihat.wav"
   },
@@ -17,23 +16,21 @@ var drumSounds = {
   }
 };
 
-var soundContext = new AudioContext();
+const soundContext = new AudioContext();
 
-for (var key in drumSounds) {
+for (const key in drumSounds) {
   loadSound(key);
 }
 
 function loadSound(name) {
-  var sound = drumSounds[name];
-  var url = sound.url;
-  var buffer = sound.buffer;
-
-  var xhr = new XMLHttpRequest();
+  const sound = drumSounds[name];
+  const url = sound.url;
+  const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "arraybuffer";
 
-  xhr.onload = function() {
-    soundContext.decodeAudioData(xhr.response, function(newBuffer) {
+  xhr.onload = () => {
+    soundContext.decodeAudioData(xhr.response, newBuffer => {
       sound.buffer = newBuffer;
     });
   };
@@ -41,16 +38,17 @@ function loadSound(name) {
   xhr.send();
 }
 
+//eslint-disable-next-line no-unused-vars
 function playSound(name, options) {
-  var sound = drumSounds[name];
-  var soundVolume = drumSounds[name].volume || 1;
+  const sound = drumSounds[name];
+  const soundVolume = drumSounds[name].volume || 1;
 
-  var buffer = sound.buffer;
+  const buffer = sound.buffer;
   if (buffer) {
-    var source = soundContext.createBufferSource();
+    const source = soundContext.createBufferSource();
     source.buffer = buffer;
 
-    var volume = soundContext.createGain();
+    const volume = soundContext.createGain();
 
     if (options) {
       if (options.volume) {
