@@ -61,6 +61,12 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(
+  "/bodyscrolllock",
+  express.static(
+    path.join(__dirname, "..", "node_modules/body-scroll-lock/lib")
+  )
+);
 app.use(controllers);
 
 module.exports = app;
