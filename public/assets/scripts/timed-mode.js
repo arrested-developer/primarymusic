@@ -87,11 +87,39 @@ const loadGame = () => {
   });
 
   // start 60 sec timer
-  setTimeout(() => alert("Game Over!"), 60 * 1000);
+  setTimeout(
+    () => alert(`Game Over! Your Score was ${playerScore.get()}`),
+    60 * 1000
+  );
 
   // loop until timer end:
   // generateNumber()
+  const scoreBar = document.getElementById("info");
+  let currentNumber = generateNumber(0);
   // display number
+  const currentNumberDisplay = document.createElement("h2");
+  currentNumberDisplay.textContent = currentNumber;
+  // display start button
+  const submitButton = document.createElement("button");
+  submitButton.textContent = "Submit";
+  /* eslint-disable-next-line */
+  submitButton.addEventListener("click", event => {
+    // TODO - fix score, it attaches the scores AT THE TIME THE EVENT LISTENER IS MADE
+    // WHAT IT NEEDS: to do them with the score as they ARE when submit is pressed
+    event.preventDefault();
+    if (
+      checkNumber(
+        Number(document.querySelector("#score > h1").textContent),
+        currentNumber
+      )
+    ) {
+      playerScore.add(1);
+      currentNumber = generateNumber(playerScore.get());
+      currentNumberDisplay.textContent = currentNumber;
+    }
+  });
+  scoreBar.appendChild(submitButton);
+  scoreBar.appendChild(currentNumberDisplay);
   // normal gameplay
   // on 'Submit' checkNumber()
   // if correct, add 1 to total score
@@ -99,9 +127,9 @@ const loadGame = () => {
 
 const evalScore = score => {
   switch (true) {
-    case score <= 5:
+    case score <= 3:
       return "easy";
-    case score <= 10:
+    case score <= 7:
       return "medium";
     case score > 10:
       return "hard";
