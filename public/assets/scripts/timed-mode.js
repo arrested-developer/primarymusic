@@ -30,60 +30,23 @@ const loadRules = () => {
 };
 
 const loadGame = () => {
-  const gameContainer = document.getElementById("game");
-  killChildren(gameContainer);
-  // bring in the drums
   // declare page elements
+  const gameContainer = document.getElementById("game");
   const scoreDisplay = document.querySelector("#score > h1");
 
-  // instantiate player score
+  // clear the game screen
+  killChildren(gameContainer);
+
+  // instantiate score objects
   const currentScore = score(); //eslint-disable-line no-undef
   const playerScore = score();
 
-  // add drums back in
-
-  let drumPicture = document.createElement("img");
-  drumPicture.src = "/assets/svg/frog.svg";
-  drumPicture.alt = "Frög, value 1000";
-  drumPicture.classList.add("drum");
-  drumPicture.id = "drum1000";
-  gameContainer.appendChild(drumPicture);
-
-  drumPicture = document.createElement("img");
-  drumPicture.src = "assets/svg/cyclopig.svg";
-  drumPicture.alt = "Cyclopig, value 100";
-  drumPicture.classList.add("drum");
-  drumPicture.id = "drum100";
-  gameContainer.appendChild(drumPicture);
-
-  drumPicture = document.createElement("img");
-  drumPicture.src = "assets/svg/burger.svg";
-  drumPicture.alt = "Burger, value 10";
-  drumPicture.classList.add("drum");
-  drumPicture.id = "drum10";
-  gameContainer.appendChild(drumPicture);
-
-  drumPicture = document.createElement("img");
-  drumPicture.src = "assets/svg/ninja.svg";
-  drumPicture.alt = "Ninja, value 1";
-  drumPicture.classList.add("drum");
-  drumPicture.id = "drum1";
-  gameContainer.appendChild(drumPicture);
+  // render drums
+  addDrums(gameContainer);
 
   // reset button
   document.getElementById("reset").addEventListener("click", () => {
     scoreDisplay.textContent = currentScore.reset();
-  });
-
-  // go through drums (has class .drum) and attach eventListeners to call hitDrum();
-  const drums = document.querySelectorAll(".drum");
-  drums.forEach(drum => {
-    const drumId = drum.id;
-    const drumScore = Number(drum.id.slice(4));
-    drum.addEventListener("click", e => {
-      e.preventDefault();
-      hitDrum(drumScore, drumId);
-    });
   });
 
   // start 60 sec timer
@@ -103,10 +66,9 @@ const loadGame = () => {
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
   /* eslint-disable-next-line */
-  submitButton.addEventListener("click", event => {
+  submitButton.addEventListener("click", () => {
     // TODO - fix score, it attaches the scores AT THE TIME THE EVENT LISTENER IS MADE
     // WHAT IT NEEDS: to do them with the score as they ARE when submit is pressed
-    event.preventDefault();
     if (
       checkNumber(
         Number(document.querySelector("#score > h1").textContent),
@@ -117,6 +79,7 @@ const loadGame = () => {
       currentNumber = generateNumber(playerScore.get());
       currentNumberDisplay.textContent = currentNumber;
     }
+    scoreDisplay.textContent = currentScore.reset();
   });
   scoreBar.appendChild(submitButton);
   scoreBar.appendChild(currentNumberDisplay);
@@ -167,6 +130,44 @@ function hitDrum(num, drum) {
 }
 
 const checkNumber = (actual, expected) => actual === expected;
+
+const addDrums = gameContainer => {
+  const drums = [
+    {
+      src: "/assets/svg/frog.svg",
+      alt: "Frög, value 1000",
+      value: 1000
+    },
+    {
+      src: "assets/svg/cyclopig.svg",
+      alt: "Cyclopig, value 100",
+      value: 100
+    },
+    {
+      src: "assets/svg/burger.svg",
+      alt: "Burger, value 10",
+      value: 10
+    },
+    {
+      src: "assets/svg/ninja.svg",
+      alt: "Frög, value 1000",
+      value: 1
+    }
+  ];
+
+  drums.forEach(d => {
+    const drumPicture = document.createElement("img");
+    drumPicture.src = d.src;
+    drumPicture.alt = d.alt;
+    drumPicture.classList.add("drum");
+    drumPicture.id = `drum${d.value}`;
+    drumPicture.addEventListener("click", e => {
+      e.preventDefault();
+      hitDrum(d.value, drumPicture.id);
+    });
+    gameContainer.appendChild(drumPicture);
+  });
+};
 
 if (typeof module !== "undefined") {
   module.exports = { generateNumber, evalScore, checkNumber };
