@@ -4,7 +4,7 @@
   "name": "MusicApp",
   "scope": "/",
   "display": "fullscreen",
-  "start_url": "https://numdrum.herokuapp.com/numdrum" /* could be a problem */,
+  "start_url": "https://numdrum.herokuapp.com/numdrum",
   "short_name": "MusicApp",
   "theme_color": "transparent",
   "description": "musical game",
