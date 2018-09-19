@@ -137,7 +137,7 @@ const makeAjax = function(url) {
   if (!window.XMLHttpRequest) return;
   let fullURL;
   const pat = /^https?:\/\//i;
-  pat.test(url) ? (fulURL = url) : (fullURL = window.location.hostname + url);
+  pat.test(url) ? (fullURL = url) : (fullURL = window.location.hostname + url);
   const ajax = new XMLHttpRequest();
   ajax.onreadystatechange = function() {
     if (ajax.readyState == 4 && ajax.status == 200)
