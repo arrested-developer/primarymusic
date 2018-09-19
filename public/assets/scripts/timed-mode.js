@@ -8,13 +8,22 @@ const gameContainer = document.getElementById("game");
 const headerContainer = document.querySelector("header");
 const currentScore = score(); //eslint-disable-line no-undef
 const playerScore = score(); //eslint-disable-line no-undef
+const currentTarget = target(); //eslint-disable-line no-undef
 
 const buildHeader = () => {
   killChildren(headerContainer);
   const backButton = createBackButton();
   const resetButton = createResetButton();
   const drumTotal = createScore();
-  const headerElements = [backButton, drumTotal, resetButton];
+  const targetNumber = createTarget(currentTarget.set(0));
+  const submitButton = createSubmitButton();
+  const headerElements = [
+    backButton,
+    drumTotal,
+    resetButton,
+    submitButton,
+    targetNumber
+  ];
   headerElements.forEach(element => {
     headerContainer.appendChild(element);
   });
@@ -26,33 +35,13 @@ const buildHeader = () => {
   resetButton.addEventListener("click", () => {
     scoreDisplay.textContent = currentScore.reset();
   });
-
-  // add event listeners: submit button
-  // TODO - this feels messy
-  const scoreBar = document.getElementById("info");
-  let currentNumber = generateNumber(0);
-  // display number
-  const currentNumberDisplay = document.createElement("h2");
-  currentNumberDisplay.textContent = currentNumber;
-  // display submit button
-  const submitButton = document.createElement("button");
-  submitButton.id = "submit";
-  submitButton.textContent = "Submit";
-  /* eslint-disable-next-line */
-  scoreBar.appendChild(submitButton);
-  scoreBar.appendChild(currentNumberDisplay);
-  document.getElementById("submit").addEventListener("click", () => {
-    if (
-      checkNumber(
-        Number(document.querySelector("#score > h1").textContent),
-        currentNumber
-      )
-    ) {
+  submitButton.addEventListener("click", () => {
+    if (checkNumber(currentScore.get(), currentTarget.get())) {
       playerScore.add(1);
     }
     scoreDisplay.textContent = currentScore.reset();
-    currentNumber = generateNumber(playerScore.get());
-    currentNumberDisplay.textContent = currentNumber;
+    currentTarget.set(currentScore.get());
+    targetNumber.textContent = currentTarget.get();
   });
 };
 
@@ -87,14 +76,10 @@ const loadGame = () => {
   // SETUP THE SCREEN
   killChildren(gameContainer);
   buildHeader();
-
   // render drums
   addDrums(gameContainer, currentScore, scoreDisplay);
-
   // start 60 sec timer
   setTimeout(() => endGame(playerScore), 60 * 1000);
-
-  // generate initial number and gameplay loop
 };
 
 const endGame = playerScore => {
@@ -255,6 +240,19 @@ const createButtonImage = (className, source, alt) => {
   buttonImage.src = source;
   buttonImage.alt = alt;
   return buttonImage;
+};
+
+const createTarget = number => {
+  const currentNumberDisplay = document.createElement("h2");
+  currentNumberDisplay.textContent = number;
+  return currentNumberDisplay;
+};
+
+const createSubmitButton = () => {
+  const submitButton = document.createElement("button");
+  submitButton.id = "submit";
+  submitButton.textContent = "Submit";
+  return submitButton;
 };
 
 if (typeof module !== "undefined") {
