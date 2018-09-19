@@ -8,6 +8,9 @@ const buildHeader = () => {
   const backButton = document.createElement("button");
   backButton.id = "back";
   backButton.classList.add("circle-button");
+  backButton.addEventListener("click", () => {
+    document.location.href = "/";
+  });
   const backImage = document.createElement("img");
   backImage.classList.add("arrow--back");
   backImage.src = "assets/svg/arrow_back.svg";
@@ -76,26 +79,23 @@ const loadGame = () => {
   // render drums
   addDrums(gameContainer, currentScore, scoreDisplay);
 
-  // reset button
+  // reset button - TODO, PUT IN HEADER
   document.getElementById("reset").addEventListener("click", () => {
     console.log(this);
     scoreDisplay.textContent = currentScore.reset();
   });
 
   // start 60 sec timer
-  setTimeout(
-    () => alert(`Game Over! Your Score was ${playerScore.get()}`),
-    60 * 1000
-  );
+  setTimeout(() => endGame(playerScore), 60 * 1000);
 
-  // The
-  // generate initial:
+  // generate initial number and gameplay loop
+  // TODO - this feels messy
   const scoreBar = document.getElementById("info");
   let currentNumber = generateNumber(0);
   // display number
   const currentNumberDisplay = document.createElement("h2");
   currentNumberDisplay.textContent = currentNumber;
-  // display start button
+  // display submit button
   const submitButton = document.createElement("button");
   submitButton.id = "submit";
   submitButton.textContent = "Submit";
@@ -103,8 +103,6 @@ const loadGame = () => {
   scoreBar.appendChild(submitButton);
   scoreBar.appendChild(currentNumberDisplay);
   document.getElementById("submit").addEventListener("click", () => {
-    // TODO - fix score, it attaches the scores AT THE TIME THE EVENT LISTENER IS MADE
-    // WHAT IT NEEDS: to do them with the score as they ARE when submit is pressed
     if (
       checkNumber(
         Number(document.querySelector("#score > h1").textContent),
@@ -117,6 +115,44 @@ const loadGame = () => {
     currentNumber = generateNumber(playerScore.get());
     currentNumberDisplay.textContent = currentNumber;
   });
+};
+
+const endGame = playerScore => {
+  messageScreen(
+    {
+      imgPath: "/assets/svg/group.svg",
+      alt: "The Numdrum gang!",
+      header: "Game Over!",
+      text: `You got ${playerScore.get()} numbers right!`,
+      button: "New Game!"
+    },
+    timedMode
+  );
+};
+
+const messageScreen = (data, cb) => {
+  const gameContainer = document.getElementById("game");
+  const headerContainer = document.querySelector("header");
+  killChildren(gameContainer);
+  killChildren(headerContainer);
+  const img = document.createElement("img");
+  img.src = data.imgPath;
+  img.alt = data.alt;
+  gameContainer.appendChild(img);
+  const header = document.createElement("h1");
+  header.textContent = data.header;
+  gameContainer.appendChild(header);
+  // display rules
+  const scoreMessage = document.createElement("h2");
+  scoreMessage.textContent = data.text;
+  gameContainer.appendChild(scoreMessage);
+  const button = document.createElement("button");
+  button.textContent = data.button;
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    cb();
+  });
+  gameContainer.appendChild(button);
 };
 
 const evalScore = score => {
