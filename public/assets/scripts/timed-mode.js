@@ -218,7 +218,7 @@ const createScore = () => {
   const scoreContainer = document.createElement("div");
   scoreContainer.id = "score";
   const scoreNumber = document.createElement("h1");
-  scoreNumber.textContent = "0";
+  scoreNumber.textContent = currentScore.reset();
   scoreContainer.appendChild(scoreNumber);
   return scoreContainer;
 };
