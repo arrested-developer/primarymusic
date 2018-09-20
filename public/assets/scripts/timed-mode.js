@@ -7,11 +7,9 @@ const timedMode = () => {
 const gameContainer = document.getElementById("game");
 gameContainer.classList.add("flexy");
 const headerContainer = document.querySelector("header");
-if (typeof module === "undefined") {
-  const currentScore = score(); //eslint-disable-line no-undef
-  const playerScore = score(); //eslint-disable-line no-undef
-  const currentTarget = target(); //eslint-disable-line no-undef
-}
+const currentScore = score(); //eslint-disable-line no-undef
+const playerScore = score(); //eslint-disable-line no-undef
+const currentTarget = target(); //eslint-disable-line no-undef
 
 const buildHeader = () => {
   killChildren(headerContainer);
