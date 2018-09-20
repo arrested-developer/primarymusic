@@ -40,7 +40,7 @@ const buildHeader = () => {
       playerScore.add(1);
     }
     scoreDisplay.textContent = currentScore.reset();
-    currentTarget.set(currentScore.get());
+    currentTarget.set(playerScore.get());
     targetNumber.textContent = currentTarget.get();
   });
 };
@@ -77,9 +77,10 @@ const loadGame = () => {
   killChildren(gameContainer);
   buildHeader();
   // render drums
-  addDrums(gameContainer, currentScore, scoreDisplay);
+  const scoreDisplay = document.querySelector("#score > h1");
+  addDrums(currentScore, scoreDisplay);
   // start 60 sec timer
-  setTimeout(() => endGame(playerScore), 60 * 1000);
+  setTimeout(() => endGame(playerScore), 30 * 1000);
 };
 
 const endGame = playerScore => {
@@ -122,9 +123,9 @@ const evalScore = score => {
   switch (true) {
     case score <= 3:
       return "easy";
-    case score <= 7:
+    case score <= 6:
       return "medium";
-    case score > 7:
+    case score > 6:
       return "hard";
   }
 };
@@ -135,7 +136,7 @@ const generateNumber = score => {
     case "easy":
       return Math.ceil(Math.random() * Math.ceil(99));
     case "medium":
-      return Math.ceil(Math.random() * Math.ceil(9999));
+      return Math.ceil(Math.random() * Math.ceil(999));
     case "hard":
       return (
         Math.ceil(Math.random() * Math.ceil(9)) * 1000 +
@@ -161,7 +162,7 @@ function hitDrum(num, drum, scoreObject, scoreContainer) {
 
 const checkNumber = (actual, expected) => actual === expected;
 
-const addDrums = (gameContainer, scoreObject, scoreContainer) => {
+const addDrums = (scoreObject, scoreContainer) => {
   const drums = [
     {
       src: "/assets/svg/frog.svg",
