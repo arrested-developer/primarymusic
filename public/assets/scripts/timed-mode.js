@@ -88,7 +88,29 @@ const loadGame = () => {
   const scoreDisplay = document.querySelector("#score > h1");
   addDrums(currentScore, scoreDisplay);
   // start 60 sec timer
-  setTimeout(() => endGame(playerScore), 60 * 1000);
+  startTimer(60, () => endGame(playerScore));
+  //setTimeout(() => endGame(playerScore), 60 * 1000);
+};
+
+const startTimer = (seconds, cb) => {
+  // display timer with total time
+  const timer = document.createElement("div");
+  timer.classList.add("timer");
+  timer.innerText = seconds;
+  gameContainer.appendChild(timer);
+  // every 1 second...
+  const x = setInterval(() => {
+    // if remaining time is > 0
+    if (seconds > 0) {
+      // update the timer to show new time
+      timer.innerText = seconds;
+      seconds--;
+    } else {
+      // run the callback
+      clearInterval(x);
+      return cb();
+    }
+  }, 1000);
 };
 
 const endGame = playerScore => {

@@ -264,3 +264,11 @@ button {
   width: 30px;
   height: 34px;
 }
+
+.timer {
+  position: absolute;
+  bottom: $m;
+  font-size: $xl;
+  font-family: $headings;
+  color: $white;
+}
