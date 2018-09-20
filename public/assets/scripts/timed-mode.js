@@ -102,6 +102,7 @@ const messageScreen = (data, cb) => {
   killChildren(headerContainer);
   const img = document.createElement("img");
   img.src = data.imgPath;
+  img.classList.add("group");
   img.alt = data.alt;
   gameContainer.appendChild(img);
   const header = document.createElement("h1");
