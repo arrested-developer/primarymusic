@@ -1,45 +1,54 @@
+/* eslint no-use-before-define: 0 */
+
 const timedMode = () => {
   loadRules();
 };
 
+const gameContainer = document.getElementById("game");
+gameContainer.classList.add("flexy");
+const headerContainer = document.querySelector("header");
+if (typeof module === "undefined") {
+  const currentScore = score(); //eslint-disable-line no-undef
+  const playerScore = score(); //eslint-disable-line no-undef
+  const currentTarget = target(); //eslint-disable-line no-undef
+}
+
 const buildHeader = () => {
-  const headerContainer = document.querySelector("header");
   killChildren(headerContainer);
-  const backButton = document.createElement("button");
-  backButton.id = "back";
-  backButton.classList.add("circle-button");
+  const backButton = createBackButton();
+  const resetButton = createResetButton();
+  const drumTotal = createScore();
+  const targetNumber = createTarget(currentTarget.set(0));
+  const submitButton = createSubmitButton();
+  const headerElements = [
+    backButton,
+    drumTotal,
+    resetButton,
+    submitButton,
+    targetNumber
+  ];
+  headerElements.forEach(element => {
+    headerContainer.appendChild(element);
+  });
+
   backButton.addEventListener("click", () => {
     document.location.href = "/";
   });
-  const backImage = document.createElement("img");
-  backImage.classList.add("arrow--back");
-  backImage.src = "assets/svg/arrow_back.svg";
-  backImage.alt = "back arrow";
-  backButton.appendChild(backImage);
-  headerContainer.appendChild(backButton);
-
-  const scoreDiv = document.createElement("div");
-  scoreDiv.id = "score";
-  const scoreH1 = document.createElement("h1");
-  scoreH1.textContent = "0";
-  scoreDiv.appendChild(scoreH1);
-  headerContainer.appendChild(scoreDiv);
-
-  const resetButton = document.createElement("button");
-  resetButton.id = "reset";
-  resetButton.classList.add("circle-button");
-  const resetImage = document.createElement("img");
-  resetImage.classList.add("arrow--reset");
-  resetImage.src = "assets/svg/arrow_reset.svg";
-  resetImage.alt = "reset icon";
-  resetButton.appendChild(resetImage);
-  headerContainer.appendChild(resetButton);
+  const scoreDisplay = drumTotal.firstChild;
+  resetButton.addEventListener("click", () => {
+    scoreDisplay.textContent = currentScore.reset();
+  });
+  submitButton.addEventListener("click", () => {
+    if (checkNumber(currentScore.get(), currentTarget.get())) {
+      playerScore.add(1);
+    }
+    scoreDisplay.textContent = currentScore.reset();
+    currentTarget.set(playerScore.get());
+    targetNumber.textContent = currentTarget.get();
+  });
 };
 
 const loadRules = () => {
-  const gameContainer = document.getElementById("game");
-  gameContainer.classList.add("flexy");
-  const headerContainer = document.querySelector("header");
   killChildren(gameContainer);
   killChildren(headerContainer);
   // DISPLAY DOG
@@ -47,13 +56,12 @@ const loadRules = () => {
   dogDisplay.src = "/assets/svg/rockwell_face_1.svg";
   dogDisplay.alt = "Rockwell";
   gameContainer.appendChild(dogDisplay);
-  dogDisplay.classList.add("dogface");
   // display header
-  const rulesHeader = document.createElement("h2");
+  const rulesHeader = document.createElement("h1");
   rulesHeader.textContent = "Timed Numdrum";
   gameContainer.appendChild(rulesHeader);
   // display rules
-  const rulesText = document.createElement("h3");
+  const rulesText = document.createElement("h2");
   rulesText.textContent =
     "Hit the drums to make as many numbers as you can in 1 minute";
   gameContainer.appendChild(rulesText);
@@ -69,54 +77,13 @@ const loadRules = () => {
 
 const loadGame = () => {
   // SETUP THE SCREEN
-  const gameContainer = document.getElementById("game");
   killChildren(gameContainer);
   buildHeader();
-  const scoreDisplay = document.querySelector("#score > h1");
-
-  // instantiate score objects
-  const currentScore = score(); //eslint-disable-line no-undef
-  const playerScore = score();
-
   // render drums
-  addDrums(gameContainer, currentScore, scoreDisplay);
-
-  // reset button - TODO, PUT IN HEADER
-  document.getElementById("reset").addEventListener("click", () => {
-    console.log(this);
-    scoreDisplay.textContent = currentScore.reset();
-  });
-
+  const scoreDisplay = document.querySelector("#score > h1");
+  addDrums(currentScore, scoreDisplay);
   // start 60 sec timer
   setTimeout(() => endGame(playerScore), 60 * 1000);
-
-  // generate initial number and gameplay loop
-  // TODO - this feels messy
-  const scoreBar = document.getElementById("info");
-  let currentNumber = generateNumber(0);
-  // display number
-  const currentNumberDisplay = document.createElement("h2");
-  currentNumberDisplay.textContent = currentNumber;
-  // display submit button
-  const submitButton = document.createElement("button");
-  submitButton.id = "submit";
-  submitButton.textContent = "Submit";
-  /* eslint-disable-next-line */
-  scoreBar.appendChild(submitButton);
-  scoreBar.appendChild(currentNumberDisplay);
-  document.getElementById("submit").addEventListener("click", () => {
-    if (
-      checkNumber(
-        Number(document.querySelector("#score > h1").textContent),
-        currentNumber
-      )
-    ) {
-      playerScore.add(1);
-    }
-    scoreDisplay.textContent = currentScore.reset();
-    currentNumber = generateNumber(playerScore.get());
-    currentNumberDisplay.textContent = currentNumber;
-  });
 };
 
 const endGame = playerScore => {
@@ -133,8 +100,6 @@ const endGame = playerScore => {
 };
 
 const messageScreen = (data, cb) => {
-  const gameContainer = document.getElementById("game");
-  const headerContainer = document.querySelector("header");
   killChildren(gameContainer);
   killChildren(headerContainer);
   const img = document.createElement("img");
@@ -174,7 +139,7 @@ const generateNumber = score => {
     case "easy":
       return Math.ceil(Math.random() * Math.ceil(99));
     case "medium":
-      return Math.ceil(Math.random() * Math.ceil(9999));
+      return Math.ceil(Math.random() * Math.ceil(999));
     case "hard":
       return (
         Math.ceil(Math.random() * Math.ceil(9)) * 1000 +
@@ -200,7 +165,7 @@ function hitDrum(num, drum, scoreObject, scoreContainer) {
 
 const checkNumber = (actual, expected) => actual === expected;
 
-const addDrums = (gameContainer, scoreObject, scoreContainer) => {
+const addDrums = (scoreObject, scoreContainer) => {
   const drums = [
     {
       src: "/assets/svg/frog.svg",
@@ -236,6 +201,62 @@ const addDrums = (gameContainer, scoreObject, scoreContainer) => {
     });
     gameContainer.appendChild(drumPicture);
   });
+};
+
+const createBackButton = () => {
+  const backButton = document.createElement("button");
+  backButton.id = "back";
+  backButton.classList.add("circle-button");
+  const backImage = createButtonImage(
+    "arrow--back",
+    "assets/svg/arrow_back.svg",
+    "back arrow"
+  );
+  backButton.appendChild(backImage);
+  return backButton;
+};
+
+const createScore = () => {
+  const scoreContainer = document.createElement("div");
+  scoreContainer.id = "score";
+  const scoreNumber = document.createElement("h1");
+  scoreNumber.textContent = "0";
+  scoreContainer.appendChild(scoreNumber);
+  return scoreContainer;
+};
+
+const createResetButton = () => {
+  const resetButton = document.createElement("button");
+  resetButton.id = "reset";
+  resetButton.classList.add("circle-button");
+  const resetImage = createButtonImage(
+    "arrow-reset",
+    "assets/svg/arrow_reset.svg",
+    "reset icon"
+  );
+  resetButton.appendChild(resetImage);
+  return resetButton;
+};
+
+const createButtonImage = (className, source, alt) => {
+  const buttonImage = document.createElement("img");
+  buttonImage.classList.add(className);
+  buttonImage.src = source;
+  buttonImage.alt = alt;
+  return buttonImage;
+};
+
+const createTarget = number => {
+  const currentNumberDisplay = document.createElement("h2");
+  currentNumberDisplay.textContent = number;
+  return currentNumberDisplay;
+};
+
+const createSubmitButton = () => {
+  const submitButton = document.createElement("button");
+  submitButton.id = "submit";
+  submitButton.textContent = "Submit";
+  return submitButton;
 };
 
 if (typeof module !== "undefined") {
