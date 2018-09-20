@@ -38,7 +38,14 @@ const buildHeader = () => {
   });
   submitButton.addEventListener("click", () => {
     if (checkNumber(currentScore.get(), currentTarget.get())) {
+      const body = document.querySelector("#container");
       playerScore.add(1);
+      body.classList.add("animate-background");
+      setTimeout(() => body.classList.remove("animate-background"), 2000);
+    } else {
+      const body = document.querySelector("#game");
+      body.classList.add("shake-element");
+      setTimeout(() => body.classList.remove("shake-element"), 1000);
     }
     scoreDisplay.textContent = currentScore.reset();
     currentTarget.set(playerScore.get());
