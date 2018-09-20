@@ -6,9 +6,11 @@ const timedMode = () => {
 
 const gameContainer = document.getElementById("game");
 const headerContainer = document.querySelector("header");
-const currentScore = score(); //eslint-disable-line no-undef
-const playerScore = score(); //eslint-disable-line no-undef
-const currentTarget = target(); //eslint-disable-line no-undef
+if (typeof module === "undefined") {
+  const currentScore = score(); //eslint-disable-line no-undef
+  const playerScore = score(); //eslint-disable-line no-undef
+  const currentTarget = target(); //eslint-disable-line no-undef
+}
 
 const buildHeader = () => {
   killChildren(headerContainer);
@@ -80,7 +82,7 @@ const loadGame = () => {
   const scoreDisplay = document.querySelector("#score > h1");
   addDrums(currentScore, scoreDisplay);
   // start 60 sec timer
-  setTimeout(() => endGame(playerScore), 30 * 1000);
+  setTimeout(() => endGame(playerScore), 60 * 1000);
 };
 
 const endGame = playerScore => {
@@ -123,9 +125,9 @@ const evalScore = score => {
   switch (true) {
     case score <= 3:
       return "easy";
-    case score <= 6:
+    case score <= 7:
       return "medium";
-    case score > 6:
+    case score > 7:
       return "hard";
   }
 };
