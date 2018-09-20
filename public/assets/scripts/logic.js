@@ -29,5 +29,5 @@ const target = () => {
 };
 
 if (typeof module !== "undefined") {
-  module.exports = score;
+  module.exports = { score, target };
 }

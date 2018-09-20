@@ -95,7 +95,6 @@ main {
   height: auto;
   right: 10vw;
   top: 0;
-  transform: rotate(10deg);
 }
 
 #drum10 {
@@ -104,7 +103,6 @@ main {
   height: auto;
   left: 10vw;
   top: 4vh;
-  transform: rotate(-10deg);
 }
 
 #drum100 {
@@ -113,7 +111,6 @@ main {
   height: auto;
   bottom: 45vh;
   right: 16px;
-  transform: rotate(20deg);
 }
 
 #drum1000 {
@@ -133,20 +130,71 @@ main {
   }
 }
 
-.drum1--clicked {
-  transform: rotate(15deg) !important;
+/*ANIMATE DRUMS*/
+
+.drum:not(:active) {
+  animation: animation 2000ms linear both;
 }
 
-.drum10--clicked {
-  transform: rotate(-15deg) !important;
+@keyframes animation {
+  0% {
+    transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  2.6% {
+    transform: matrix3d(1.08, 0, 0, 0, 0, 1.08, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  5.21% {
+    transform: matrix3d(1.022, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  10.31% {
+    transform: matrix3d(1.08, 0, 0, 0, 0, 1.08, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  15.52% {
+    transform: matrix3d(1.022, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  20.62% {
+    transform: matrix3d(1.009, 0, 0, 0, 0, 1.009, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  30.93% {
+    transform: matrix3d(1.022, 0, 0, 0, 0, 1.022, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  41.24% {
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
 }
 
-.drum100--clicked {
-  transform: rotate(25deg) !important;
+.flexy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
 }
 
-.drum1000--clicked {
-  transform: rotate(-5deg) !important;
+.dogface {
+  height: auto;
+  max-width: 8%;
+}
+
+.group {
+  max-height: 50vh;
+}
+
+button {
+  min-height: 40px;
+  background: #f00182;
+  color: #f4f6fc;
+  border-radius: 15px;
+  border: 3px solid #f4f6fc;
+  box-shadow: 2px 2px 5px #070c2a;
+  font-size: 1.414rem;
+  margin-bottom: 16px;
+  font-weight: bold;
+  font-family: "Caveat Brush", "Arial Bold", "Arial", sans-serif;
+  text-align: center;
 }
 
 .circle-button {
