@@ -15,6 +15,19 @@ const score = () => {
   };
 };
 
+const target = () => {
+  let target = 0;
+  return {
+    get() {
+      return target;
+    },
+    set(score) {
+      target = generateNumber(score);
+      return target;
+    }
+  };
+};
+
 if (typeof module !== "undefined") {
   module.exports = score;
 }
