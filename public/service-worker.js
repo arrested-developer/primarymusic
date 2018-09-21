@@ -46,7 +46,24 @@ self.addEventListener("install", event => {
   event.waitUntil(installStaticFiles().then(() => self.skipWaiting()));
 });
 
-// application fetch network data
+// clear old caches
+function clearOldCaches() {
+  return caches.keys().then(keylist => {
+    return Promise.all(
+      keylist.filter(key => key !== CACHE).map(key => caches.delete(key))
+    );
+  });
+}
+
+// on activation of application, clear old caches
+self.addEventListener("activate", event => {
+  console.log("service worker: activate");
+
+  // delete old caches
+  event.waitUntil(clearOldCaches().then(() => self.clients.claim()));
+});
+
+// set up application to fetch cached files offline
 self.addEventListener("fetch", event => {
   // abandon non-GET requests
   if (event.request.method !== "GET") return;
