@@ -63,7 +63,7 @@ const loadRules = () => {
   killChildren(headerContainer);
   // DISPLAY DOG
   const dogDisplay = document.createElement("img");
-  dogDisplay.src = "/assets/svg/rockwell_face_1.svg";
+  dogDisplay.src = "/assets/svg/rockwell_face.svg";
   dogDisplay.alt = "Rockwell";
   gameContainer.appendChild(dogDisplay);
   // display header
