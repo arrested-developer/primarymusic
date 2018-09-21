@@ -46,6 +46,7 @@
     "jest": "^23.6.0"
   },
   "dependencies": {
-    "body-scroll-lock": "^2.5.7"
+    "body-scroll-lock": "^2.5.7",
+    "sass": "^1.14.0"
   }
 }
