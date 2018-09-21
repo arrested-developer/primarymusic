@@ -47,6 +47,14 @@ p {
   margin: $m auto $m auto;
 }
 
+.paragraph-large {
+  text-align: center;
+  font: $sans-serif;
+  font-size: 1.414rem;
+  margin-bottom: $l;
+  color: $white;
+}
+
 /* NUMDRUM */
 
 h1 {
@@ -65,13 +73,41 @@ h1 {
 
 header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: $m;
   margin: 0;
   border: 0;
-  height: 96px;
   width: 100%;
   justify-content: space-between;
+}
+
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-row--2 {
+  justify-content: center;
+  margin-top: $s;
+}
+
+.header-rockwell {
+  width: 96px;
+  height: 96px;
+}
+
+.target-number {
+  font-size: $xl;
+  color: $white;
+  background: $green-1;
+  border-radius: $xl $xl $xl 0;
+  padding-left: $m;
+  padding-right: $m;
+  height: 74px;
+  border: 5px solid $green-2;
+  margin-right: $l;
 }
 
 main {
@@ -94,7 +130,7 @@ main {
   max-width: 25vmin;
   height: auto;
   right: 10vw;
-  top: 0;
+  top: -32px;
 }
 
 #drum10 {
@@ -109,7 +145,7 @@ main {
   width: 31.8vmax;
   max-width: 50vmin;
   height: auto;
-  bottom: 45vh;
+  bottom: 40vh;
   right: 16px;
 }
 

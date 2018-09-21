@@ -1,6 +1,7 @@
 /* eslint no-use-before-define: 0 */
 
 const timedMode = () => {
+  playerScore.reset();
   loadRules();
 };
 
@@ -13,24 +14,26 @@ const currentTarget = target(); //eslint-disable-line no-undef
 
 const buildHeader = () => {
   killChildren(headerContainer);
+  const rowOne = document.createElement("div");
+  rowOne.classList.add("header-row");
   const backButton = createBackButton();
   const resetButton = createResetButton();
   const drumTotal = createScore();
+  const rowOneElements = [backButton, drumTotal, resetButton];
+  rowOneElements.forEach(element => {
+    rowOne.appendChild(element);
+  });
+  const rowTwo = document.createElement("div");
+  rowTwo.classList.add("header-row", "header-row--2");
   const targetNumber = createTarget(currentTarget.set(0));
   const submitButton = createSubmitButton();
-  const headerElements = [
-    backButton,
-    drumTotal,
-    resetButton,
-    submitButton,
-    targetNumber
-  ];
-  headerElements.forEach(element => {
-    headerContainer.appendChild(element);
+  const rockwell = createRockwell();
+  const rowTwoElements = [rockwell, targetNumber, submitButton];
+  rowTwoElements.forEach(element => {
+    rowTwo.appendChild(element);
   });
-
   backButton.addEventListener("click", () => {
-    document.location.href = "/";
+    document.location.href = "/numdrum";
   });
   const scoreDisplay = drumTotal.firstChild;
   resetButton.addEventListener("click", () => {
@@ -51,6 +54,8 @@ const buildHeader = () => {
     currentTarget.set(playerScore.get());
     targetNumber.textContent = currentTarget.get();
   });
+  headerContainer.appendChild(rowOne);
+  headerContainer.appendChild(rowTwo);
 };
 
 const loadRules = () => {
@@ -66,7 +71,8 @@ const loadRules = () => {
   rulesHeader.textContent = "Timed Numdrum";
   gameContainer.appendChild(rulesHeader);
   // display rules
-  const rulesText = document.createElement("h2");
+  const rulesText = document.createElement("p");
+  rulesText.classList.add("paragraph-large");
   rulesText.textContent =
     "Hit the drums to make as many numbers as you can in 1 minute";
   gameContainer.appendChild(rulesText);
@@ -277,6 +283,7 @@ const createButtonImage = (className, source, alt) => {
 const createTarget = number => {
   const currentNumberDisplay = document.createElement("h2");
   currentNumberDisplay.textContent = number;
+  currentNumberDisplay.classList.add("target-number");
   return currentNumberDisplay;
 };
 
@@ -285,6 +292,14 @@ const createSubmitButton = () => {
   submitButton.id = "submit";
   submitButton.textContent = "Submit";
   return submitButton;
+};
+
+const createRockwell = () => {
+  const rockwell = document.createElement("img");
+  rockwell.src = "/assets/svg/rockwell_face.svg";
+  rockwell.alt = "Rockwell the dog";
+  rockwell.classList.add("header-rockwell");
+  return rockwell;
 };
 
 if (typeof module !== "undefined") {
