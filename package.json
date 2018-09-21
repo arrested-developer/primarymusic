@@ -7,18 +7,7 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.js",
-      "**/public/**/logic.js",
-      "!**/public/**/dom.js",
-      "!**/public/**/score.js",
-      "!**/public/**/timed-mode.js",
-      "!test/**",
-      "!coverage/**",
-      "!node_modules/**",
-      "!**/index.js",
-      "!**/manup.js",
-      "!**/pwabuilder-sw.js",
-      "!**/bodyScrollLock.js"
+      "**/public/**/logic.js"
     ]
   },
   "scripts": {
