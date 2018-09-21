@@ -1,26 +1,27 @@
 /* eslint-disable */
 
-const logic = require("../public/assets/scripts/logic");
 const {
-  generateNumber,
+  score,
+  target,
   evalScore,
-  checkNumber
-} = require("../public/assets/scripts/timed-mode");
+  generateNumber
+} = require("../public/assets/scripts/logic");
 
-describe("Score tests", () => {
-  const score = logic();
-  test("Testing get method", () => {
-    expect(score.add(5)).toBe(5);
-    expect(score.get()).toBe(5);
-    expect(score.reset()).toBe(0);
+describe("Score and target tests", () => {
+  const testScore = score();
+  test("Testing score methods", () => {
+    expect(testScore.add(5)).toBe(5);
+    expect(testScore.get()).toBe(5);
+    expect(testScore.reset()).toBe(0);
+  });
+  const testTarget = target();
+  test("Testing target methods", () => {
+    expect(testTarget.get()).toBe(0);
+    expect(typeof testTarget.set(0)).toBe("number");
   });
 });
 
 describe("Timed mode tests", () => {
-  test("Testing check number function", () => {
-    expect(checkNumber(6, 6)).toBeTruthy();
-    expect(checkNumber(6, 5)).toBeFalsy();
-  });
   test("Test evalScore - easy, medium & hard", () => {
     expect(evalScore(0)).toBe("easy");
     expect(evalScore(7)).toBe("medium");

@@ -11,6 +11,7 @@
       "**/public/**/logic.js",
       "!**/public/**/dom.js",
       "!**/public/**/score.js",
+      "!**/public/**/timed-mode.js",
       "!test/**",
       "!coverage/**",
       "!node_modules/**",
