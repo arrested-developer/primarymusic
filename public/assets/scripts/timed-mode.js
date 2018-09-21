@@ -1,118 +1,147 @@
 /* eslint no-use-before-define: 0 */
 
-const timedMode = () => {
-  playerScore.reset();
-  loadRules();
-};
-
+const screen = document.getElementById("container");
 const gameContainer = document.getElementById("game");
-gameContainer.classList.add("flexy");
 const headerContainer = document.querySelector("header");
-const currentScore = score(); //eslint-disable-line no-undef
-const playerScore = score(); //eslint-disable-line no-undef
-const currentTarget = target(); //eslint-disable-line no-undef
 
-const buildHeader = () => {
-  killChildren(headerContainer);
-  const rowOne = document.createElement("div");
-  rowOne.classList.add("header-row");
-  const backButton = createBackButton();
-  const resetButton = createResetButton();
-  const drumTotal = createScore();
-  const rowOneElements = [backButton, drumTotal, resetButton];
-  rowOneElements.forEach(element => {
-    rowOne.appendChild(element);
-  });
-  const rowTwo = document.createElement("div");
-  rowTwo.classList.add("header-row", "header-row--2");
-  const targetNumber = createTarget(currentTarget.set(0));
-  const submitButton = createSubmitButton();
-  const rockwell = createRockwell();
-  const rowTwoElements = [rockwell, targetNumber, submitButton];
-  rowTwoElements.forEach(element => {
-    rowTwo.appendChild(element);
-  });
-  backButton.addEventListener("click", () => {
-    document.location.href = "/numdrum";
-  });
-  const scoreDisplay = drumTotal.firstChild;
-  resetButton.addEventListener("click", () => {
-    scoreDisplay.textContent = currentScore.reset();
-  });
-  submitButton.addEventListener("click", () => {
-    if (checkNumber(currentScore.get(), currentTarget.get())) {
-      const body = document.querySelector("#container");
-      playerScore.add(1);
-      body.classList.add("animate-background");
-      setTimeout(() => body.classList.remove("animate-background"), 2000);
-    } else {
-      const body = document.querySelector("#game");
-      body.classList.add("shake-element");
-      setTimeout(() => body.classList.remove("shake-element"), 1000);
-    }
-    scoreDisplay.textContent = currentScore.reset();
-    currentTarget.set(playerScore.get());
-    targetNumber.textContent = currentTarget.get();
-  });
-  headerContainer.appendChild(rowOne);
-  headerContainer.appendChild(rowTwo);
-};
+const drums = [
+  {
+    src: "/assets/svg/frog.svg",
+    alt: "Frög, value 1000",
+    value: 1000
+  },
+  {
+    src: "assets/svg/cyclopig.svg",
+    alt: "Cyclopig, value 100",
+    value: 100
+  },
+  {
+    src: "assets/svg/burger.svg",
+    alt: "Burger, value 10",
+    value: 10
+  },
+  {
+    src: "assets/svg/ninja.svg",
+    alt: "Frög, value 1000",
+    value: 1
+  }
+];
 
-const loadRules = () => {
-  killChildren(gameContainer);
-  killChildren(headerContainer);
-  // DISPLAY DOG
-  const dogDisplay = document.createElement("img");
-  dogDisplay.src = "/assets/svg/rockwell_face_1.svg";
-  dogDisplay.alt = "Rockwell";
-  gameContainer.appendChild(dogDisplay);
-  // display header
-  const rulesHeader = document.createElement("h1");
-  rulesHeader.textContent = "Timed Numdrum";
-  gameContainer.appendChild(rulesHeader);
-  // display rules
-  const rulesText = document.createElement("p");
-  rulesText.classList.add("paragraph-large");
-  rulesText.textContent =
-    "Hit the drums to make as many numbers as you can in 1 minute";
-  gameContainer.appendChild(rulesText);
-  // display start button
-  const startButton = document.createElement("button");
-  startButton.textContent = "Start!";
+const timedMode = () => {
+  killChildren([gameContainer, headerContainer]);
+  const startButton = createStartButton();
+  const ruleElements = [
+    createRockwell(false),
+    createRulesTitle("Timed Numdrum"),
+    createRulesText(
+      "Hit the drums to make as many numbers as you can in 1 minute"
+    ),
+    startButton
+  ];
+  ruleElements.forEach(element => {
+    gameContainer.appendChild(element);
+  });
   startButton.addEventListener("click", event => {
     event.preventDefault();
-    loadGame();
+    const drumTotal = score(); // eslint-disable-line no-undef
+    const playerScore = score(); // eslint-disable-line no-undef
+    loadGame(drumTotal, playerScore);
   });
-  gameContainer.appendChild(startButton);
 };
 
-const loadGame = () => {
-  // SETUP THE SCREEN
-  killChildren(gameContainer);
-  buildHeader();
-  // render drums
-  const scoreDisplay = document.querySelector("#score > h1");
-  addDrums(currentScore, scoreDisplay);
-  // start 60 sec timer
+const loadGame = (drumTotal, playerScore) => {
+  killChildren([gameContainer]);
+  playerScore.reset();
+  drumTotal.reset();
+  const currentTarget = target(); // eslint-disable-line no-undef
+
+  buildHeader(drumTotal, currentTarget, playerScore);
+
+  const drumTotalContainer = document.getElementById("score").firstChild;
+  renderDrums(drumTotal, drumTotalContainer);
+
   startTimer(60, () => endGame(playerScore));
-  //setTimeout(() => endGame(playerScore), 60 * 1000);
+};
+
+const buildHeader = (drumTotal, currentTarget, playerScore) => {
+  killChildren([headerContainer]);
+
+  const headerTopRow = document.createElement("div");
+  headerTopRow.classList.add("header-row");
+  const headerTopRowElements = [
+    createBackButton(),
+    createDrumTotal(drumTotal),
+    createResetButton()
+  ];
+  populateHeaderRow(headerTopRow, headerTopRowElements);
+
+  const headerBottomRow = document.createElement("div");
+  headerBottomRow.classList.add("header-row", "header-row--2");
+  const headerBottomRowElements = [
+    createRockwell(true),
+    createTarget(currentTarget.set(0)),
+    createSubmitButton()
+  ];
+  populateHeaderRow(headerBottomRow, headerBottomRowElements);
+
+  headerContainer.appendChild(headerTopRow);
+  headerContainer.appendChild(headerBottomRow);
+
+  document.getElementById("back").addEventListener("click", () => {
+    document.location.href = "/numdrum";
+  });
+
+  const drumTotalValue = document.getElementById("score").firstChild;
+  const resetButton = document.getElementById("reset");
+  resetButton.addEventListener("click", () => {
+    drumTotalValue.textContent = drumTotal.reset();
+  });
+
+  const submitButton = document.getElementById("submit");
+  submitButton.addEventListener("click", () => {
+    if (drumTotal.get() === currentTarget.get()) {
+      playerScore.add(1);
+      screen.classList.add("animate-background");
+      setTimeout(() => screen.classList.remove("animate-background"), 2000);
+    } else {
+      screen.classList.add("shake-element");
+      setTimeout(() => screen.classList.remove("shake-element"), 1000);
+    }
+    drumTotalValue.textContent = drumTotal.reset();
+    currentTarget.set(playerScore.get());
+    const targetNumber = document.querySelector(".target-number");
+    targetNumber.textContent = currentTarget.get();
+  });
+};
+
+const renderDrums = (drumTotal, drumTotalContainer) => {
+  drums.forEach(drum => {
+    const drumImage = document.createElement("img");
+    drumImage.src = drum.src;
+    drumImage.alt = drum.alt;
+    drumImage.classList.add("drum");
+    drumImage.id = `drum${drum.value}`;
+    drumImage.addEventListener("click", e => {
+      e.preventDefault();
+      hitDrum(drum.value, drumImage.id, drumTotal, drumTotalContainer);
+    });
+    gameContainer.appendChild(drumImage);
+  });
+};
+
+const hitDrum = (num, drumId, drumTotal, drumTotalContainer) => {
+  drumTotalContainer.textContent = drumTotal.add(num);
+  playSound(drumId); // eslint-disable-line no-undef
+  document.getElementById(drumId).classList.toggle(drumId + "--clicked");
 };
 
 const startTimer = (seconds, cb) => {
-  // display timer with total time
-  const timer = document.createElement("div");
-  timer.classList.add("timer");
-  timer.innerText = seconds;
-  gameContainer.appendChild(timer);
-  // every 1 second...
+  const timer = createTimer(seconds);
   const x = setInterval(() => {
-    // if remaining time is > 0
     if (seconds > 0) {
-      // update the timer to show new time
       timer.innerText = seconds;
       seconds--;
     } else {
-      // run the callback
       clearInterval(x);
       return cb();
     }
@@ -133,8 +162,8 @@ const endGame = playerScore => {
 };
 
 const messageScreen = (data, cb) => {
-  killChildren(gameContainer);
-  killChildren(headerContainer);
+  killChildren([gameContainer, headerContainer]);
+
   const img = document.createElement("img");
   img.src = data.imgPath;
   img.classList.add("group");
@@ -156,84 +185,11 @@ const messageScreen = (data, cb) => {
   gameContainer.appendChild(button);
 };
 
-const evalScore = score => {
-  switch (true) {
-    case score <= 3:
-      return "easy";
-    case score <= 7:
-      return "medium";
-    case score > 7:
-      return "hard";
-  }
-};
-
-const generateNumber = score => {
-  const difficulty = evalScore(score);
-  switch (difficulty) {
-    case "easy":
-      return Math.ceil(Math.random() * Math.ceil(99));
-    case "medium":
-      return Math.ceil(Math.random() * Math.ceil(999));
-    case "hard":
-      return (
-        Math.ceil(Math.random() * Math.ceil(9)) * 1000 +
-        Math.ceil(Math.random() * Math.ceil(99)) +
-        Math.ceil(Math.random() * Math.ceil(9))
-      );
-  }
-};
-
-// TODO: move to dom when it works / when consolidating with other group
-const killChildren = element => {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
-};
-
-// hitDrum is a wrapper function which calls individual gameplay elements as each drum is hit
-function hitDrum(num, drum, scoreObject, scoreContainer) {
-  scoreContainer.textContent = scoreObject.add(num);
-  playSound(drum); //eslint-disable-line no-undef
-  document.getElementById(drum).classList.toggle(drum + "--clicked");
-}
-
-const checkNumber = (actual, expected) => actual === expected;
-
-const addDrums = (scoreObject, scoreContainer) => {
-  const drums = [
-    {
-      src: "/assets/svg/frog.svg",
-      alt: "Frög, value 1000",
-      value: 1000
-    },
-    {
-      src: "assets/svg/cyclopig.svg",
-      alt: "Cyclopig, value 100",
-      value: 100
-    },
-    {
-      src: "assets/svg/burger.svg",
-      alt: "Burger, value 10",
-      value: 10
-    },
-    {
-      src: "assets/svg/ninja.svg",
-      alt: "Frög, value 1000",
-      value: 1
+const killChildren = containerArray => {
+  containerArray.forEach(container => {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
     }
-  ];
-
-  drums.forEach(d => {
-    const drumPicture = document.createElement("img");
-    drumPicture.src = d.src;
-    drumPicture.alt = d.alt;
-    drumPicture.classList.add("drum");
-    drumPicture.id = `drum${d.value}`;
-    drumPicture.addEventListener("click", e => {
-      e.preventDefault();
-      hitDrum(d.value, drumPicture.id, scoreObject, scoreContainer);
-    });
-    gameContainer.appendChild(drumPicture);
   });
 };
 
@@ -250,13 +206,13 @@ const createBackButton = () => {
   return backButton;
 };
 
-const createScore = () => {
-  const scoreContainer = document.createElement("div");
-  scoreContainer.id = "score";
-  const scoreNumber = document.createElement("h1");
-  scoreNumber.textContent = currentScore.reset();
-  scoreContainer.appendChild(scoreNumber);
-  return scoreContainer;
+const createDrumTotal = drumTotal => {
+  const drumTotalContainer = document.createElement("div");
+  drumTotalContainer.id = "score";
+  const drumTotalValue = document.createElement("h1");
+  drumTotalValue.textContent = drumTotal.reset();
+  drumTotalContainer.appendChild(drumTotalValue);
+  return drumTotalContainer;
 };
 
 const createResetButton = () => {
@@ -294,14 +250,45 @@ const createSubmitButton = () => {
   return submitButton;
 };
 
-const createRockwell = () => {
+const createRockwell = header => {
   const rockwell = document.createElement("img");
   rockwell.src = "/assets/svg/rockwell_face.svg";
   rockwell.alt = "Rockwell the dog";
-  rockwell.classList.add("header-rockwell");
+  if (header) {
+    rockwell.classList.add("header-rockwell");
+  }
   return rockwell;
 };
 
-if (typeof module !== "undefined") {
-  module.exports = { generateNumber, evalScore, checkNumber };
-}
+const populateHeaderRow = (row, elements) => {
+  elements.forEach(element => {
+    row.appendChild(element);
+  });
+};
+
+const createRulesTitle = titleText => {
+  const title = document.createElement("h1");
+  title.textContent = titleText;
+  return title;
+};
+
+const createRulesText = ruleText => {
+  const rules = document.createElement("p");
+  rules.classList.add("paragraph-large");
+  rules.textContent = ruleText;
+  return rules;
+};
+
+const createStartButton = () => {
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start!";
+  return startButton;
+};
+
+const createTimer = seconds => {
+  const timer = document.createElement("div");
+  timer.classList.add("timer");
+  timer.innerText = seconds;
+  gameContainer.appendChild(timer);
+  return timer;
+};
